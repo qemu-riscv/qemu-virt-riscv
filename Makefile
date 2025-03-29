@@ -16,6 +16,11 @@ $(TARGET): $(OBJ) link.lds
 	$(CROSS_COMPILE)objcopy --gap-fill 0 -O verilog main.elf main.hex
 	$(CROSS_COMPILE)objdump -D main.elf > main.dump
 
+uart.c: uart.h
+
+%.o: %.c
+	$(CROSS_COMPILE)gcc $(CFLAGS) -c $< -o $@
+
 %.o: %.s
 	$(CROSS_COMPILE)as $(AFLAGS) $< -o $@
 

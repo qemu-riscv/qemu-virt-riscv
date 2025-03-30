@@ -2,8 +2,8 @@ OUTPUT_ARCH( "riscv" )
 ENTRY(_start)
 
 MEMORY {
-  ROM (rx) : ORIGIN = 0x20000000, LENGTH = 20K  /*start from 0xA0000000 to 0xA000FFFF*/
-  RAM (wx) : ORIGIN = 0x80000000, LENGTH = 128K  /*start from 0xA0020000 to 0xA0002FFF*/
+  ROM (rx) : ORIGIN = 0x80000000, LENGTH = 32K
+  RAM (wx) : ORIGIN = 0x81000000, LENGTH = 16K
 }
 
 SECTIONS {
@@ -12,13 +12,13 @@ SECTIONS {
 
   .text.start_ : {
     *(.text.start_)
-  } >RAM
+  } >ROM
 
   .text ALIGN(4) : {
     *(.text .text.*)
     . = ALIGN(4) ;
     _etext = ABSOLUTE(.) ;
-   } >RAM
+   } >ROM
 
   /* Start RAM regions */
   /* data segment */

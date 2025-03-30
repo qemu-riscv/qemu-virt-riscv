@@ -9,7 +9,10 @@ LDFLAGS := -Wl,-Map=main.map -nostdlib -Wl,-melf32lriscv -Wl,--build-id=none -Wl
 TARGET = main.elf
 
 APP_SRC := $(wildcard ./applications/sample/*.c) $(wildcard ./applications/sample/*.s)
+APP_HDR := $(wildcard ./applications/sample/*.h)
+
 DRV_SRC := $(wildcard ./drivers/*.c)
+DRV_HDR := $(wildcard ./drivers/*.h) $(wildcard ./common/*.h)
 
 SRC := $(APP_SRC) $(DRV_SRC)
 LNK := applications/sample/link.lds
@@ -28,6 +31,9 @@ uart.c: uart.h
 
 %.o: %.s
 	$(CROSS_COMPILE)as $(AFLAGS) $< -o $@
+
+check:
+	./formater/checkpatch.pl --ignore SPDX_LICENSE_TAG --no-tree --quiet --strict -f $(APP_SRC) $(APP_HDR) $(DRV_SRC) $(DRV_HDR)
 
 clean:
 	rm -f *.elf *.hex *.dump *.map $(OBJ)

@@ -61,31 +61,31 @@ _start:
     la  t0, _data_begin
     la  t1, _data_end
     la  t2, _data_region
-    memcpy t0, t1, t2, s0 
-    
+    memcpy t0, t1, t2, s0
+
     la  t0, _sdata_begin
     la  t1, _sdata_end
     la  t2, _sdata_region
-    memcpy t0, t1, t2, s0 
-    
+    memcpy t0, t1, t2, s0
+
     la  t0, _rodata_begin
     la  t1, _rodata_end
     la  t2, _rodata_region
-    memcpy t0, t1, t2, s0 
-    
+    memcpy t0, t1, t2, s0
+
     la  t0, _init_array_begin
     la  t1, _init_array_end
     la  t2, _init_array_region
     memcpy t0, t1, t2, s0
-    
+
     la  t0, _bss_begin
     la t1, _bss_end
-    memset t0, t1, x0  
-    
+    memset t0, t1, x0
+
     la  t0, _sbss_begin
     la  t1, _sbss_end
-    memset t0, t1, x0  
-    
+    memset t0, t1, x0
+
     li t0 , 0
     li t1 , 0
     li t2 , 0

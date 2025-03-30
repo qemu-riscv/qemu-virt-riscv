@@ -59,9 +59,8 @@
 #define UART_DLL    REG_TYPE(UART_BASE + DLL, uint8_t)
 #define UART_DLM    REG_TYPE(UART_BASE + DLM, uint8_t)
 
-
 // UART APIs
-void uart_init();
+void uart_init(void);
 void putch(uint8_t);
 void uart_send(uint8_t);
 void my_printf(const char *s, uint32_t num);

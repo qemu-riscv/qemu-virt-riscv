@@ -1,0 +1,26 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "*" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - run: sudo apt-get update
+    - run: sudo apt-get install -y build-essential
+    - run: sudo apt-get install -y wget
+    - run: wget -q --show-progress --progress=bar:force https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2025.01.20/riscv32-elf-ubuntu-22.04-gcc-nightly-2025.01.20-nightly.tar.xz -O riscv32-elf-ubuntu-22.04-gcc-nightly-2025.01.20-nightly.tar.xz || { echo 'Download failed'; exit 1; }
+    - run: tar -xf riscv32-elf-ubuntu-22.04-gcc-nightly-2025.01.20-nightly.tar.xz
+    - run: ls
+    - run: export PATH=$PATH:$(pwd)/riscv/bin/ && make
+
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v4
+      with:
+        name: Artifact
+        path: main.*

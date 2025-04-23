@@ -1,7 +1,6 @@
 // See LICENSE for license details.
 
 #include "uart.h"
-// #include "platform.h"
 
 void uart_init(void)
 {

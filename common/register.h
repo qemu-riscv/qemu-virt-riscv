@@ -10,6 +10,4 @@
 #define REG_32(address) REG_TYPE(address, uint32_t)
 #define REG_64(address) REG_TYPE(address, uint64_t)
 
-#define REG(base, offset, type) REG_TYPE((base) + (offset), type)
-
 #define BIT(n) (1 << (n))

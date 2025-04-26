@@ -61,8 +61,8 @@
 
 // UART APIs
 void uart_init(void);
-void putch(uint8_t);
-void uart_send(uint8_t);
+void putch(uint8_t ch);
+void uart_send(uint8_t data);
 void my_printf(const char *s, uint32_t num);
 
 #endif

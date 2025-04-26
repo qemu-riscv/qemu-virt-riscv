@@ -27,7 +27,7 @@ void uart_init(void)
 	my_printf("Uart is working\n", 0);
 }
 
-void uart_send(unsigned char data)
+void uart_send(uint8_t data)
 {
 	// wait until THR empty
 	while ((UART_LSR & TRANSMITTER_EMPTY) != TRANSMITTER_EMPTY)

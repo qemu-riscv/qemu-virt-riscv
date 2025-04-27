@@ -4,21 +4,23 @@ TARGET_ELF = main.elf
 TARGET_HEX = main.hex
 TARGET_DUMP = main.dump
 TARGET_MAP = main.map
+APPLICATION_NAME ?= sample
+APPLICATION_DIR := applications/${APPLICATION_NAME}
 
 CFLAGS := -Werror -Wall -Wextra -Werror -Wformat -Wunused -pedantic -Wconversion
-CFLAGS += -fno-builtin-printf -fno-common -g -O0 -ffreestanding -march=rv32imf -mabi=ilp32f -I ./ -I ./common -I ./drivers
+CFLAGS += -fno-builtin-printf -fno-common -g -O0 -ffreestanding -march=rv32imf -mabi=ilp32f -I ./ -I ./common -I ./drivers -I ./${APPLICATION_DIR}
 # LDFLAGS := -static -lgcc -Tlink.lds -march=rv32imf -mabi=ilp32f -Wa,-march=rv32imf -nostartfiles -Wl,-Map=main.map
 AFLAGS := -g -march=rv32imf -mabi=ilp32f
 GCCFLAGS := -Wl,-Map=$(TARGET_MAP) -nostdlib -Wl,-melf32lriscv -Wl,--build-id=none -Wl,--print-memory-usage -Wl,--print-gc-sections -Wl,--gc-sections
 
-APP_SRC := $(wildcard ./applications/sample/*.c) $(wildcard ./applications/sample/*.s)
-APP_HDR := $(wildcard ./applications/sample/*.h)
+APP_SRC := $(wildcard ./${APPLICATION_DIR}/*.c) $(wildcard ./${APPLICATION_DIR}/*.s)
+APP_HDR := $(wildcard ./${APPLICATION_DIR}/*.h)
 
 DRV_SRC := $(wildcard ./drivers/*.c)
 DRV_HDR := $(wildcard ./drivers/*.h) $(wildcard ./common/*.h)
 
 SRC := $(APP_SRC) $(DRV_SRC)
-LNK := applications/sample/link.lds
+LNK := ${APPLICATION_DIR}/link.lds
 OBJ := $(SRC:.c=.o)
 OBJ := $(OBJ:.s=.o)
 

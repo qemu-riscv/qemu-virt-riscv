@@ -1,14 +1,11 @@
 // See LICENSE for license details.
 
-#ifndef UART_HEADER_H
-#define UART_HEADER_H
+#pragma once
 
 #include "common/register.h"
 
-#define MEM_MAP_UART_BASE 0x10000000
-
-#define UART_BASE ((uint32_t)(MEM_MAP_UART_BASE))
-#define UART_RBR 0x0u
+// RBR: Receiver Buffer register [Read, LCR[7] == 0]
+#define RBR 0x0u
 
 // THR: Transmitter Holding register [Write, LCR[7] == 0]
 #define THR 0x0u
@@ -37,11 +34,10 @@
 // SCR: Scratch register [Read/Write]
 #define SCR 0x7u
 
-// DLL: Divisor latch (least significant byte) register [Read/Write, LCR[7] ==
-// 1]
+// DLL: Divisor latch (least significant byte) register [RD/WR, LCR[7] == 1]
 #define DLL 0x0u
 
-// DLM: Divisor latch (most significant byte) register [Read/Write, LCR[7] == 1]
+// DLM: Divisor latch (most significant byte) register [RD/WR, LCR[7] == 1]
 #define DLM 0x1u
 
 // FCR flags
@@ -64,5 +60,3 @@ void uart_init(void);
 void putch(uint8_t ch);
 void uart_send(uint8_t data);
 void my_printf(const char *s, uint32_t num);
-
-#endif
